@@ -2,15 +2,15 @@ package com.quicknotes.gui;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import com.quicknotes.controller.NoteController;
 
-//  Main window of program
-public class NotepadFrame extends JFrame implements MouseListener {
+public class NotepadFrame extends JFrame {
     private NotePanel notePanel;
     private NoteController noteController;
-    private JPopupMenu popupMenu;
+    private PopupFrame popupMenuManager;
 
     public NotepadFrame() {
         this.setTitle("QuickNotes");
@@ -25,47 +25,17 @@ public class NotepadFrame extends JFrame implements MouseListener {
         setLayout(new BorderLayout());
         add(notePanel, BorderLayout.CENTER);
 
-        popupMenu = new JPopupMenu();
-        popupMenu.setBounds(200, 100, 150, 200);
+        popupMenuManager = new PopupFrame();
 
-        JMenuItem copy = new JMenuItem("Copy");
-        JMenuItem cut = new JMenuItem("Cut");
-        JMenuItem paste = new JMenuItem("Paste");
-        JMenuItem selectAll = new JMenuItem("Select all");
-
-        popupMenu.add(copy);
-        popupMenu.add(cut);
-        popupMenu.add(paste);
-        popupMenu.add(selectAll);
-
-        this.addMouseListener(this);
-        this.add(popupMenu);
+        this.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (SwingUtilities.isRightMouseButton(e)) {
+                    popupMenuManager.showPopup(NotepadFrame.this, e.getX(), e.getY());
+                }
+            }
+        });
 
         this.setVisible(true);
-    }
-
-    @Override
-    public void mouseClicked(MouseEvent evt) {
-        popupMenu.show(this, evt.getX(), evt.getY());
-    }
-
-    @Override
-    public void mousePressed(MouseEvent evt) {
-        //  
-    }
-
-    @Override
-    public void mouseReleased(MouseEvent evt) {
-
-    }
-
-    @Override
-    public void mouseEntered(MouseEvent evt) {
-
-    }
-
-    @Override
-    public void mouseExited(MouseEvent evt) {
-        
     }
 }

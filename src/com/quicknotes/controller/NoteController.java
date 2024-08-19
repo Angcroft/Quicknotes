@@ -1,7 +1,6 @@
 package com.quicknotes.controller;
 
 import com.quicknotes.model.Note;
-import com.quicknotes.model.Note;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Path;
@@ -15,7 +14,7 @@ public class NoteController {
         final Path path = Paths.get(fileName);
 
         try (FileWriter writer = new FileWriter(fileName, true)) {
-            writer.write(note.getContent() + "\n");
+            writer.write(content + "\n");
         } catch (IOException e) {
             e.printStackTrace();
         }
