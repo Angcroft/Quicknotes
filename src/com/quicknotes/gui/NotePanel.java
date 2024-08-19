@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import com.quicknotes.controller.NoteController;
 import com.quicknotes.model.Note;
+import java.io.IOException;
 
 //  Contains a JTextArea for writing notes and a button for saving it
 public class NotePanel extends JPanel {
@@ -28,7 +29,11 @@ public class NotePanel extends JPanel {
     private void saveNote() {
         String content = noteArea.getText();
         Note note = new Note(content);
-        noteController.saveNote(note);
-        JOptionPane.showMessageDialog(this, "Note saved with success!");
+        try {
+            noteController.saveNote(note);
+            JOptionPane.showMessageDialog(this, "Note saved with success!");
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(this, "Failed to save note: " + e.getMessage());
+        }
     }
 }
