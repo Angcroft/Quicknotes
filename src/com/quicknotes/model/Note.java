@@ -1,5 +1,6 @@
 package com.quicknotes.model;
 
+//  This represents the content of the note from NotePanel
 public class Note {
     private String content;
 

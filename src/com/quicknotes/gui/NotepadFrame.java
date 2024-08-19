@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import com.quicknotes.controller.NoteController;
 
+//  Main window of program
 public class NotepadFrame extends JFrame {
     private NotePanel notePanel;
     private NoteController noteController;
