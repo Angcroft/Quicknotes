@@ -4,6 +4,10 @@ package com.quicknotes.model;
 public class Note {
     private String content;
 
+    public Note() {
+        this.content = "";
+    }
+
     public Note(String content) {
         this.content = content;
     }

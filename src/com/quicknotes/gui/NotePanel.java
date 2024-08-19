@@ -12,6 +12,7 @@ import java.io.IOException;
 public class NotePanel extends JPanel {
     private JTextArea noteArea;
     private JButton saveButton;
+    private JButton loadButton;
     private PopupFrame popupMenuManager;
     JLabel label;
 
@@ -21,14 +22,26 @@ public class NotePanel extends JPanel {
         return label;
     }
 
+    private JPanel createNorthPanel() {
+        JPanel  panel = new JPanel(new BorderLayout());
+
+        saveButton = new JButton("Save note");
+        saveButton.addActionListener(e -> saveNote());
+        panel.add(saveButton, BorderLayout.NORTH);
+
+        loadButton = new JButton("Load note");
+        loadButton.addActionListener(e -> loadNote());
+        panel.add(loadButton, BorderLayout.SOUTH);
+
+        return panel;
+    }
+
     public NotePanel(NoteController noteController) {
         this.noteController = noteController;
 
         setLayout(new BorderLayout());
 
-        saveButton = new JButton("Save note");
-        saveButton.addActionListener(e -> saveNote());
-        add(saveButton, BorderLayout.NORTH);
+        add(createNorthPanel(), BorderLayout.NORTH);
 
         noteArea = new JTextArea();
         add(new JScrollPane(noteArea), BorderLayout.CENTER);
@@ -61,6 +74,17 @@ public class NotePanel extends JPanel {
             JOptionPane.showMessageDialog(this, "Note saved with success!");
         } catch (IOException e) {
             JOptionPane.showMessageDialog(this, "Failed to save note: " + e.getMessage());
+        }
+    }
+
+    private void loadNote() {
+        Note note = new Note();
+        try {
+            noteController.loadNote(note);
+            noteArea.setText(note.getContent());
+            JOptionPane.showMessageDialog(this, "Note loaded successfully!");
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(this, "Failed to load note: " + e.getMessage());
         }
     }
 }
