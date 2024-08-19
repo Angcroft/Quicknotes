@@ -25,8 +25,6 @@ public class NotepadFrame extends JFrame {
         setLayout(new BorderLayout());
         add(notePanel, BorderLayout.CENTER);
 
-        popupMenuManager = new PopupFrame();
-
         this.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {

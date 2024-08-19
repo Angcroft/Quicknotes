@@ -17,6 +17,10 @@ public class NotePanel extends JPanel {
 
     private NoteController noteController;
 
+    public JLabel getLabel() {
+        return label;
+    }
+
     public NotePanel(NoteController noteController) {
         this.noteController = noteController;
 
@@ -36,7 +40,7 @@ public class NotePanel extends JPanel {
         label.setForeground(Color.blue);
         add(label, BorderLayout.SOUTH);
 
-        popupMenuManager = new PopupFrame();
+        popupMenuManager = new PopupFrame(this);
 
         //  Also another mouse listener as it doesn't work if i click over the notepanel
         this.addMouseListener(new MouseAdapter() {

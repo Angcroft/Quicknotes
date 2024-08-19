@@ -6,12 +6,11 @@ import java.awt.Component;
 import java.awt.event.*;
 
 public class PopupFrame extends JPopupMenu implements MouseListener, ActionListener {
-    private JPopupMenu popupMenu;
     private JMenuItem copy, cut, paste, selectAll;
-    private JLabel label;
+    private NotePanel notePanel;
 
-    public PopupFrame() {
-        popupMenu = new JPopupMenu();
+    public PopupFrame(NotePanel notePanel) {
+        this.notePanel = notePanel;
 
         //  Add popup menu items
         copy = new JMenuItem("Copy");
@@ -26,26 +25,26 @@ public class PopupFrame extends JPopupMenu implements MouseListener, ActionListe
         selectAll.addActionListener(this);
 
         //  Adds menu items to popupMenu
-        popupMenu.add(copy);
-        popupMenu.add(cut);
-        popupMenu.add(paste);
-        popupMenu.add(selectAll);
+        add(copy);
+        add(cut);
+        add(paste);
+        add(selectAll);
     }
 
     public void showPopup(Component component, int x, int y) {
-        popupMenu.show(component, x, y);
+        show(component, x, y);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == copy) {
-            label.setText("You clicked on copy");
+            notePanel.getLabel().setText("You clicked on copy");
         } else if (e.getSource() == cut) {
-            label.setText("You clicked on cut");
+            notePanel.getLabel().setText("You clicked on cut");
         } else if (e.getSource() == paste) {
-            label.setText("You clicked on paste");
+            notePanel.getLabel().setText("You clicked on paste");
         } else if (e.getSource() == selectAll) {
-            label.setText("You clicked on selectAll");
+            notePanel.getLabel().setText("You clicked on selectAll");
         }
     }
 
